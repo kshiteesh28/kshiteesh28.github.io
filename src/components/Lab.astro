@@ -1,0 +1,61 @@
+<section class="lab-section" id="lab" aria-labelledby="lab-heading">
+  <div class="wrap">
+    <div class="section-top"><span class="eyebrow light">02 / THE INTERACTIVE LAB</span><span class="lab-tag"><span></span> Runs entirely in your browser</span></div>
+    <div class="lab-heading"><h2 id="lab-heading">Make room<br/>for <em>everyone.</em></h2><p>One noisy client. Three quieter ones.<br/>A service that can only do so much.<br/><br/>Turn up the traffic and see what an admission policy changes.</p></div>
+    <div class="lab-console" data-lab>
+      <div class="lab-controls">
+        <p class="console-label">EXPERIMENT / 001</p>
+        <h3>A small model.<br/>A real tradeoff.</h3>
+        <label for="load">Incoming traffic <output id="load-value" for="load">240 req/s</output></label>
+        <input id="load" type="range" min="40" max="400" step="20" value="240" />
+        <label for="capacity">Service capacity <output id="capacity-value" for="capacity">120 req/s</output></label>
+        <input id="capacity" type="range" min="40" max="200" step="20" value="120" />
+        <fieldset><legend>Admission policy</legend>
+          <label class="policy"><input type="radio" name="policy" value="arrival" checked/> Arrival order <span>Busy client goes first</span></label>
+          <label class="policy"><input type="radio" name="policy" value="fair"/> Fair share <span>One slot per client, per round</span></label>
+        </fieldset>
+        <p class="lab-disclaimer">Illustrative deterministic simulation. These are model results, not RateGuard benchmarks or production measurements.</p>
+      </div>
+      <div class="lab-results">
+        <div class="console-label result-head"><span>CLIENT ALLOCATION</span><span>ADMITTED / REQUESTED</span></div>
+        <div id="client-bars" class="client-bars">
+          {['A — noisy neighbor','B','C','D'].map((name,i)=><div class="client-row"><div><span>{name}</span><span data-client-count={i}></span></div><div class="traffic-track"><span class="traffic-demand" data-demand={i}></span><span class="traffic-admitted" data-admitted={i}></span></div></div>)}
+        </div>
+        <div class="chart-legend"><span><i></i> Admitted</span><span><i></i> Requested</span></div>
+        <div class="lab-metrics"><div><output id="throughput">120</output><span>ADMITTED / SEC</span></div><div><output id="deferred">120</output><span>DEFERRED / SEC</span></div><div><output id="fairness">0.25</output><span>JAIN FAIRNESS · 0–1</span></div></div>
+        <p id="lab-insight" class="lab-insight" role="status" aria-live="polite" aria-atomic="true"></p>
+        <details><summary>What is this model doing?</summary><p>Client A generates 70% of requests; B, C and D split the rest. Arrival order allocates the service budget to A first. Fair share allocates one slot to each waiting client per round, until capacity runs out. Unadmitted requests are counted as deferred, with no queue or retry simulation. Jain’s index measures equality of admitted allocations: closer to 1 means more even service, not necessarily better performance. Costs, latency, network failures and distributed coordination are outside this model.</p></details>
+      </div>
+    </div>
+  </div>
+</section>
+<script>
+  import { simulate } from '../lib/simulation';
+  const root = document.querySelector<HTMLElement>('[data-lab]');
+  if (root) {
+    const load = root.querySelector<HTMLInputElement>('#load')!;
+    const capacity = root.querySelector<HTMLInputElement>('#capacity')!;
+    function update() {
+      if (!root) return;
+      const mode = root.querySelector<HTMLInputElement>('input[name="policy"]:checked')!.value;
+      const result = simulate(Number(load.value), Number(capacity.value), mode === 'fair' ? 'fair' : 'arrival');
+      root.querySelector('#load-value')!.textContent = load.value + ' req/s';
+      root.querySelector('#capacity-value')!.textContent = capacity.value + ' req/s';
+      result.demand.forEach((value, i) => {
+        root.querySelector('[data-client-count="' + i + '"]')!.textContent = result.admitted[i] + ' / ' + value;
+        (root.querySelector('[data-demand="' + i + '"]') as HTMLElement).style.width = (value / 280 * 100) + '%';
+        (root.querySelector('[data-admitted="' + i + '"]') as HTMLElement).style.width = (result.admitted[i] / 280 * 100) + '%';
+      });
+      root.querySelector('#throughput')!.textContent = String(result.total);
+      root.querySelector('#deferred')!.textContent = String(result.deferred);
+      root.querySelector('#fairness')!.textContent = result.fairness.toFixed(2);
+      root.querySelector('#lab-insight')!.textContent = result.deferred === 0
+        ? 'There is room for every request. Both policies can serve all four clients.'
+        : mode === 'fair'
+        ? 'Same capacity. More balanced access. The noisy client gives up slots so quieter clients can make progress.'
+        : 'Client A gets first access to a finite budget. Try fair share to see who gains access without adding capacity.';
+    }
+    root.addEventListener('input', update);
+    update();
+  }
+</script>

@@ -1,0 +1,41 @@
+---
+import '../styles/global.css';
+interface Props { title?: string; description?: string; }
+const { title = 'Kshiteesh R Bharadwaj — Systems & AI Developer Tooling', description = 'Software engineer building reliable C++ systems, distributed services and AI developer workflows. Previously Nokia and Infinera. MCS at UIUC.' } = Astro.props;
+const base = import.meta.env.BASE_URL;
+const canonical = new URL(Astro.url.pathname, Astro.site);
+---
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content={description} />
+    <meta name="theme-color" content="#f6f4ed" />
+    <link rel="icon" type="image/svg+xml" href={base + 'favicon.svg'} />
+    <link rel="canonical" href={canonical} />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:image" content={new URL(base + 'social.png', Astro.site)} />
+    <meta name="twitter:card" content="summary_large_image" />
+    <title>{title}</title>
+  </head>
+  <body>
+    <a class="skip" href="#main">Skip to content</a>
+    <header class="site-header wrap">
+      <a class="brand" href={base} aria-label="Kshiteesh Bharadwaj — home"><span class="brand-mark" aria-hidden="true">k<span>↗</span></span><span>Kshiteesh<br/><span class="brand-sub">R Bharadwaj</span></span></a>
+      <nav aria-label="Main navigation">
+        <a href={base + '#work'}>Selected work</a><a href={base + '#lab'}>The lab</a><a href={base + '#about'}>About</a>
+        <a class="nav-contact" href={base + '#contact'}>Let’s talk <span aria-hidden="true">↗</span></a>
+      </nav>
+    </header>
+    <slot />
+    <footer class="site-footer wrap">
+      <a class="footer-name" href={base}>Kshiteesh R Bharadwaj<span>Systems, thoughtfully engineered.</span></a>
+      <div><a href="https://github.com/kshiteesh28">GitHub ↗</a><a href="https://linkedin.com/in/kshiteesh-bharadwaj-kb2001">LinkedIn ↗</a><a href={base + 'resume.pdf'}>Resume ↗</a></div>
+      <span class="footer-note">Champaign, Illinois · {new Date().getFullYear()}</span>
+    </footer>
+  </body>
+</html>
