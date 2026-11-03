@@ -2,44 +2,31 @@
 import Layout from '../layouts/Layout.astro';
 const base = import.meta.env.BASE_URL;
 const work = [
-  { title: 'RateGuard', kind: 'Personal project', summary: 'Built a distributed C++ rate limiter and fixed concurrent quota overages with atomic compare-and-swap. The project record reports a 58% reduction in API rejections.', stack: 'C++ · gRPC · Redis · etcd', href: base + 'work/rateguard/' },
-  { title: 'Spec-to-Code', kind: 'Nokia', summary: 'Contributed to an AI-assisted engineering workflow with a library of 100+ skills for requirements, design, code generation and validation.', stack: 'AI-assisted SDLC · Code generation · Validation', href: base + 'work/spec-to-code/' },
-  { title: 'Flow-State', kind: 'Personal project', summary: 'An intelligent task scheduler with real-time event streaming and persistent task state.', stack: 'TypeScript · Bun · SQLite · Whisper AI', href: 'https://github.com/kshiteesh28/Flow-State' },
-  { title: 'Klassy', kind: 'College project', summary: 'Led a cashless cafeteria ordering system with live order tracking; adopted college-wide and reduced transaction time by 60%.', stack: 'Node.js · PostgreSQL · TypeScript · WebSocket', href: null },
-  { title: 'Production reliability', kind: 'Infinera and Nokia', summary: 'Worked on responsive hardware-facing services, recovery after restarts and safety interlocks. My Nokia recovery work improved mean time to recovery by 45%.', stack: 'C++ · Linux · gRPC · Protocol Buffers', href: base + 'work/production-reliability/' },
+  { title:'RateGuard', kind:'Personal project', summary:'Built a distributed C++ rate limiter. Fixed concurrent quota overages with atomic compare-and-swap; the project record reports 58% fewer API rejections.', stack:'C++ · gRPC · Redis · etcd', href:base+'work/rateguard/' },
+  { title:'Spec-to-Code', kind:'Nokia', summary:'Contributed to an AI-assisted engineering workflow with 100+ skills for requirements, design, code generation and validation.', stack:'AI-assisted SDLC · Code generation · Validation', href:base+'work/spec-to-code/' },
+  { title:'Flow-State', kind:'Personal project', summary:'An intelligent task scheduler with real-time event streaming and persistent task state.', stack:'TypeScript · Bun · SQLite · Whisper AI', href:'https://github.com/kshiteesh28/Flow-State' },
+  { title:'Klassy', kind:'College project', summary:'Led a cashless cafeteria ordering system with live order tracking. Adopted college-wide; reduced transaction time by 60%.', stack:'Node.js · PostgreSQL · TypeScript · WebSocket', href:null },
+  { title:'Production reliability', kind:'Infinera and Nokia', summary:'Worked on responsive hardware-facing services, restart recovery and safety interlocks. Nokia recovery work improved mean time to recovery by 45%.', stack:'C++ · Linux · gRPC · Protocol Buffers', href:base+'work/production-reliability/' },
 ];
 ---
-<Layout title="Kshiteesh R Bharadwaj | Software Engineer" description="Software engineer with 3.5 years of experience at Nokia and Infinera, now pursuing an MCS at UIUC. Interested in C++, backend and distributed systems internships.">
+<Layout title="Kshiteesh R Bharadwaj | Software Engineer" description="Software engineer with 3.5 years of experience at Nokia and Infinera, now pursuing an MCS at UIUC.">
   <main id="main" class="plain-home">
-    <section class="plain-intro wrap" id="about">
+    <section class="plain-intro" id="about">
       <h1>Kshiteesh R Bharadwaj</h1>
-      <p class="plain-role">Software Engineer · C++ · Backend Systems</p>
-      <p class="plain-summary">I have 3.5 years of experience building telecom software at Nokia and Infinera. I’m now pursuing my MCS at UIUC and looking for a Summer 2027 software engineering internship. I enjoy working on systems where reliability and clear engineering matter.</p>
-      <p class="plain-location">Champaign, Illinois · University of Illinois Urbana-Champaign</p>
-      <div class="plain-links">
-        <a class="resume-button" href={base + 'resume.pdf'}>Resume (PDF) <span aria-hidden="true">↗</span></a>
-        <a href="mailto:kshiteeshrbharadwaj@gmail.com">Email</a>
-        <a href="https://linkedin.com/in/kshiteesh-bharadwaj-kb2001">LinkedIn ↗</a>
-        <a href="https://github.com/kshiteesh28">GitHub ↗</a>
-      </div>
+      <p>I’m a software engineer with 3.5 years of experience at Nokia and Infinera. I’m currently pursuing my MCS at UIUC and looking for a Summer 2027 software engineering internship.</p>
+      <p>I’ve worked on C++ services, distributed recovery and developer tools. I like making systems easier to understand and more dependable under real operating conditions.</p>
+      <div class="plain-social"><a href="https://linkedin.com/in/kshiteesh-bharadwaj-kb2001" aria-label="LinkedIn">LinkedIn</a><a href="https://github.com/kshiteesh28" aria-label="GitHub">GitHub</a><a href="mailto:kshiteeshrbharadwaj@gmail.com" aria-label="Email">Email</a></div>
     </section>
 
-    <section class="plain-section wrap" id="experience">
+    <section class="plain-section" id="experience">
       <h2>Experience</h2>
       <article class="plain-entry">
         <div class="plain-entry-head"><h3>Software Development Engineer 2 · Nokia</h3><span>2025–2026 · Bengaluru, India</span></div>
-        <ul>
-          <li>Unified live-event and restart recovery paths, improving mean time to recovery by 45%.</li>
-          <li>Built a 2-of-3 safety interlock across distributed entities; reduced on-call reliability incidents from 3 to 0 per quarter.</li>
-          <li>Contributed to Spec-to-Code, an AI-assisted engineering initiative adopted by 20% of developers across the organization.</li>
-        </ul>
+        <ul><li>Unified live-event and restart recovery paths, improving mean time to recovery by 45%.</li><li>Built a 2-of-3 safety interlock across distributed entities; reduced on-call reliability incidents from 3 to 0 per quarter.</li><li>Contributed to Spec-to-Code, an AI-assisted engineering initiative adopted by 20% of developers across the organization.</li></ul>
       </article>
       <article class="plain-entry">
         <div class="plain-entry-head"><h3>Software Development Engineer 1 · Infinera</h3><span>2023–2025 · Bengaluru, India</span></div>
-        <ul>
-          <li>Moved long-running hardware transfers to a four-worker pool, improving dispatch responsiveness from 340 ms to 16 ms.</li>
-          <li>Improved restart handling and developed bidirectional gRPC telemetry services.</li>
-        </ul>
+        <ul><li>Moved long-running hardware transfers to a four-worker pool, improving dispatch responsiveness from 340 ms to 16 ms.</li><li>Improved restart handling and developed bidirectional gRPC telemetry services.</li></ul>
       </article>
       <article class="plain-entry">
         <div class="plain-entry-head"><h3>Software Engineering Intern · Infinera</h3><span>Feb–Aug 2023 · Bengaluru, India</span></div>
@@ -47,27 +34,18 @@ const work = [
       </article>
     </section>
 
-    <section class="plain-section wrap" id="projects">
-      <h2>Projects and selected work</h2>
-      <div class="plain-projects">
-        {work.map(item => <article class="plain-project">
-          <div class="plain-entry-head"><h3>{item.href ? <a href={item.href}>{item.title} ↗</a> : item.title}</h3><span>{item.kind}</span></div>
-          <p>{item.summary}</p>
-          <p class="plain-stack">{item.stack}</p>
-        </article>)}
-      </div>
+    <section class="plain-section" id="projects">
+      <h2>Projects</h2>
+      <div class="plain-projects">{work.map(item=><article class="plain-project">
+        <div class="plain-entry-head"><h3>{item.href ? <a href={item.href}>{item.title}</a> : item.title}</h3><span>{item.kind}</span></div>
+        <p>{item.summary}</p><p class="plain-stack">{item.stack}</p>
+      </article>)}</div>
     </section>
 
-    <section class="plain-section wrap" id="education">
+    <section class="plain-section" id="education">
       <h2>Education</h2>
-      <article class="plain-entry">
-        <div class="plain-entry-head"><h3>Master of Computer Science · UIUC</h3><span>2026–2027</span></div>
-        <p>Coursework includes distributed systems, applied machine learning and data mining.</p>
-      </article>
-      <article class="plain-entry">
-        <div class="plain-entry-head"><h3>B.E., Information Science · RV Institute of Technology and Management</h3><span>2019–2023</span></div>
-        <p>Ranked #3 · GPA 9.15/10.0</p>
-      </article>
+      <article class="plain-entry"><div class="plain-entry-head"><h3>Master of Computer Science · UIUC</h3><span>2026–2027</span></div><p>Coursework: distributed systems, applied machine learning and data mining.</p></article>
+      <article class="plain-entry"><div class="plain-entry-head"><h3>B.E., Information Science · RV Institute of Technology and Management</h3><span>2019–2023</span></div><p>Ranked #3 · GPA 9.15/10.0</p></article>
     </section>
   </main>
 </Layout>
