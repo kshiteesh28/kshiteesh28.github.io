@@ -1,58 +1,50 @@
 ---
 import Layout from '../layouts/Layout.astro';
-import SystemDiagram from '../components/SystemDiagram.astro';
-import Lab from '../components/Lab.astro';
 const base = import.meta.env.BASE_URL;
-const works = [
-  { number:'01', slug:'rateguard', title:'A fairer way to say “not yet.”', type:'PERSONAL PROJECT / DISTRIBUTED SYSTEMS', name:'RateGuard', description:'A distributed rate limiter built around the tension between fairness, throughput and correctness under concurrency.', kind:'rate' as const, stack:'C++ · gRPC · Redis · etcd', metric:'58%', label:'reduction in API rejection rate', tone:'green' },
-  { number:'02', slug:'production-reliability', title:'Build for the restart. Not just the happy path.', type:'EMPLOYER WORK / NOKIA + INFINERA', name:'Production reliability', description:'Worker pools, safety interlocks and a shared recovery path. Making hardware-facing software respond predictably when the system gets complicated.', kind:'reliability' as const, stack:'C++ · Linux · Protobuf · gRPC', metric:'45%', label:'improvement in mean time to recovery', tone:'sand' },
-  { number:'03', slug:'spec-to-code', title:'Better engineering, before the first line.', type:'EMPLOYER WORK / NOKIA', name:'Spec-to-Code', description:'My contribution to an AI-assisted development initiative: a skill library spanning requirements, design, code generation and validation.', kind:'ai' as const, stack:'AI-assisted SDLC · Engineering skills · Validation', metric:'20%', label:'organization-wide developer adoption', tone:'lilac' },
+const work = [
+  { title:'RateGuard', kind:'Personal project', summary:'Built a distributed C++ rate limiter. Fixed concurrent quota overages with atomic compare-and-swap; the project record reports 58% fewer API rejections.', stack:'C++ · gRPC · Redis · etcd', href:base+'work/rateguard/' },
+  { title:'Spec-to-Code', kind:'Nokia', summary:'Contributed to an AI-assisted engineering workflow with 100+ skills for requirements, design, code generation and validation.', stack:'AI-assisted SDLC · Code generation · Validation', href:base+'work/spec-to-code/' },
+  { title:'Flow-State', kind:'Personal project', summary:'An intelligent task scheduler with real-time event streaming and persistent task state.', stack:'TypeScript · Bun · SQLite · Whisper AI', href:'https://github.com/kshiteesh28/Flow-State' },
+  { title:'Klassy', kind:'College project', summary:'Led a cashless cafeteria ordering system with live order tracking. Adopted college-wide; reduced transaction time by 60%.', stack:'Node.js · PostgreSQL · TypeScript · WebSocket', href:null },
+  { title:'Production reliability', kind:'Infinera and Nokia', summary:'Worked on responsive hardware-facing services, restart recovery and safety interlocks. Nokia recovery work improved mean time to recovery by 45%.', stack:'C++ · Linux · gRPC · Protocol Buffers', href:base+'work/production-reliability/' },
 ];
 ---
-<Layout>
-  <main id="main">
-    <section class="hero wrap">
-      <div class="hero-topline"><span class="eyebrow"><span class="status-dot"></span> SYSTEMS ENGINEER / BUILDER</span><span class="hero-location">CHAMPAIGN, IL · UIUC MCS</span></div>
-      <div class="hero-grid">
-        <div class="hero-copy"><h1>Good systems.<br/>Great under<br/><em>pressure.</em><span class="title-dot" aria-hidden="true">↗</span></h1></div>
-        <div class="hero-aside">
-          <div class="hero-system" aria-hidden="true">
-            <div class="system-caption"><span>DESIGN FOR THE UNEXPECTED</span><span>FIG. 01</span></div>
-            <svg viewBox="0 0 400 300" fill="none">
-              <circle cx="200" cy="147" r="112" stroke="currentColor" stroke-dasharray="3 7" opacity=".23"/>
-              <circle cx="200" cy="147" r="73" stroke="currentColor" opacity=".12"/>
-              <path d="M89 101 200 75 310 160 200 226 89 101 310 160M200 75V226M89 101 200 147 310 160M200 147V226" stroke="currentColor" opacity=".4"/>
-              <circle cx="200" cy="147" r="25" fill="#24332c"/><path d="m189 147 8 8 14-17" stroke="#d9f99b" stroke-width="2"/>
-              <g fill="#f6f4ed" stroke="currentColor"><rect x="61" y="82" width="56" height="38" rx="5"/><rect x="172" y="56" width="56" height="38" rx="5"/><rect x="282" y="141" width="56" height="38" rx="5"/><rect x="172" y="207" width="56" height="38" rx="5"/></g>
-              <g fill="currentColor" font-family="monospace" font-size="11" text-anchor="middle"><text x="89" y="106">NODE</text><text x="200" y="80">SYNC</text><text x="310" y="165">STATE</text><text x="200" y="231">RETRY</text></g>
-              <circle cx="145" cy="88" r="5" fill="#ed785b"/><circle cx="254" cy="117" r="5" fill="#ed785b"/><circle cx="255" cy="194" r="5" fill="#ed785b"/>
-            </svg>
-            <div class="diagram-foot"><span><i></i> Consistency. Recovery. Progress.</span><span>CONCEPT</span></div>
-          </div>
-          <p>I’m <strong>Kshiteesh.</strong> I build reliable C++ systems and AI developer workflows. Previously at Nokia and Infinera. Now pursuing my MCS at UIUC.</p>
-          <a class="text-link" href="#work">Explore my work <span aria-hidden="true">↓</span></a>
-        </div>
-      </div>
-      <div class="hero-bottom"><span>AT THE INTERSECTION OF</span><p>Systems software <i>/</i> Distributed backends <i>/</i> AI developer tools</p><a href={base + 'resume.pdf'}>Download resume ↗</a></div>
+<Layout title="Kshiteesh R Bharadwaj | Software Engineer" description="Software engineer with 3.5 years of experience at Nokia and Infinera, now pursuing an MCS at UIUC.">
+  <main id="main" class="plain-home">
+    <section class="plain-intro" id="about">
+      <h1>Kshiteesh R Bharadwaj</h1>
+      <p>I’m a software engineer with 3.5 years of experience at Nokia and Infinera. I’m currently pursuing my MCS at UIUC and looking for a Summer 2027 software engineering internship.</p>
+      <p>I’ve worked on C++ services, distributed recovery and developer tools. I like making systems easier to understand and more dependable under real operating conditions.</p>
     </section>
-    <section class="intro-band"><div class="wrap"><p>The interesting work starts<br/>where the <em>happy path ends.</em></p><div>What happens when a node restarts? When a long transfer blocks the dispatch thread? When generated code needs to earn your trust?<br/><br/>Those are the problems I like working on.</div></div></section>
-    <section id="work" class="work-section wrap" aria-labelledby="work-heading">
-      <div class="section-top"><span class="eyebrow">01 / SELECTED WORK</span><span class="muted mono">THREE STORIES. ONE ENGINEERING MINDSET.</span></div>
-      <div class="section-heading"><h2 id="work-heading">Built with<br/><em>consequence.</em></h2><p>How I approach systems that need to work,<br/>and the decisions that make them better.</p></div>
-      <div class="work-list">{works.map(work=><article class="work-card">
-        <a class={'work-visual ' + work.tone} href={base + 'work/' + work.slug + '/'} tabindex="-1" aria-hidden="true"><div class="visual-top"><span>{work.number} / {work.name}</span><span>↗</span></div><SystemDiagram kind={work.kind}/><div class="visual-metric"><strong>{work.metric}</strong><span>{work.label}</span></div></a>
-        <div class="work-copy"><span class="eyebrow">{work.type}</span><h3><a href={base + 'work/' + work.slug + '/'}>{work.title}</a></h3><p>{work.description}</p><span class="stack">{work.stack}</span><a class="text-link" href={base + 'work/' + work.slug + '/'}>Read the case study <span aria-hidden="true">↗</span></a></div>
+
+    <section class="plain-section" id="experience">
+      <h2>Experience</h2>
+      <article class="plain-entry">
+        <div class="plain-entry-head"><h3>Software Development Engineer 2 · Nokia</h3><span>2025–2026 · Bengaluru, India</span></div>
+        <ul><li>Unified live-event and restart recovery paths, improving mean time to recovery by 45%.</li><li>Built a 2-of-3 safety interlock across distributed entities; reduced on-call reliability incidents from 3 to 0 per quarter.</li><li>Contributed to Spec-to-Code, an AI-assisted engineering initiative adopted by 20% of developers across the organization.</li></ul>
+      </article>
+      <article class="plain-entry">
+        <div class="plain-entry-head"><h3>Software Development Engineer 1 · Infinera</h3><span>2023–2025 · Bengaluru, India</span></div>
+        <ul><li>Moved long-running hardware transfers to a four-worker pool, improving dispatch responsiveness from 340 ms to 16 ms.</li><li>Improved restart handling and developed bidirectional gRPC telemetry services.</li></ul>
+      </article>
+      <article class="plain-entry">
+        <div class="plain-entry-head"><h3>Software Engineering Intern · Infinera</h3><span>Feb–Aug 2023 · Bengaluru, India</span></div>
+        <p>Built a noise-filtering algorithm for signal-quality validation, tested with 276 GoogleTest cases.</p>
+      </article>
+    </section>
+
+    <section class="plain-section" id="projects">
+      <h2>Projects</h2>
+      <div class="plain-projects">{work.map(item=><article class="plain-project">
+        <div class="plain-entry-head"><h3>{item.href ? <a href={item.href}>{item.title}</a> : item.title}</h3><span>{item.kind}</span></div>
+        <p>{item.summary}</p><p class="plain-stack">{item.stack}</p>
       </article>)}</div>
     </section>
-    <Lab />
-    <section class="other-work wrap" aria-labelledby="more-heading"><div class="section-top"><span class="eyebrow">ALSO ON MY WORKBENCH</span></div><h2 id="more-heading" class="small-heading">Different problems.<br/><em>Same curiosity.</em></h2>
-      <div class="project-pair"><article><span class="project-symbol" aria-hidden="true">≈</span><span class="eyebrow">PERSONAL PROJECT</span><h3>Flow-State</h3><p>An intelligent task scheduler with a Bun/ElysiaJS backend, SQLite persistence and real-time event streaming.</p><span class="stack">Bun · TypeScript · SQLite · Whisper AI</span><a class="text-link" href="https://github.com/kshiteesh28/Flow-State">Explore the repository <span aria-hidden="true">↗</span></a></article><article><span class="project-symbol" aria-hidden="true">⌘</span><span class="eyebrow">PERSONAL PROJECT</span><h3>Klassy</h3><p>A cashless cafeteria system I led, with live order tracking and state synchronization. Adopted college-wide, reducing transaction time by 60%.</p><span class="stack">Node.js · PostgreSQL · TypeScript · WebSocket</span><p class="project-note">Project summary · no public repository linked</p></article></div>
+
+    <section class="plain-section" id="education">
+      <h2>Education</h2>
+      <article class="plain-entry"><div class="plain-entry-head"><h3>Master of Computer Science · UIUC</h3><span>2026–2027</span></div><p>Coursework: distributed systems, applied machine learning and data mining.</p></article>
+      <article class="plain-entry"><div class="plain-entry-head"><h3>B.E., Information Science · RV Institute of Technology and Management</h3><span>2019–2023</span></div><p>Ranked #3 · GPA 9.15/10.0</p></article>
     </section>
-    <section class="about-section wrap" id="about" aria-labelledby="about-heading">
-      <div class="section-top"><span class="eyebrow">03 / THE PERSON BEHIND THE SYSTEMS</span></div>
-      <div class="about-grid"><div><h2 id="about-heading">Close to<br/>the metal.<br/><em>Open to what’s next.</em></h2><p class="about-bio">I’m Kshiteesh R Bharadwaj, a software engineer in Champaign, Illinois. My production experience is in telecom software: control planes, hardware-facing services, telemetry and recovery.</p><p class="about-bio">I’m now studying computer science at the University of Illinois Urbana-Champaign, bringing that experience into distributed systems and applied machine learning.</p><div class="interest-list"><span>C++ / Linux</span><span>Distributed systems</span><span>Backend infrastructure</span><span>AI developer tooling</span></div></div>
-      <div class="timeline"><article><span class="timeline-date">2026 — 2027 · IN PROGRESS</span><h3>Master of Computer Science</h3><p>University of Illinois Urbana-Champaign</p><span>Distributed systems · Applied ML · Data mining</span></article><article><span class="timeline-date">2025 — 2026</span><h3>Software Development Engineer 2</h3><p>Nokia · Bangalore</p><span>Distributed control planes, recovery and AI-assisted SDLC.</span></article><article><span class="timeline-date">2023 — 2025</span><h3>Software Development Engineer 1</h3><p>Infinera · Bangalore</p><span>HAL concurrency, gRPC services and production debugging.</span></article><article><span class="timeline-date">FEB — AUG 2023</span><h3>Software Development Intern</h3><p>Infinera · Bangalore</p><span>Bidirectional telemetry and signal-quality validation.</span></article><article><span class="timeline-date">2019 — 2023</span><h3>B.E. · Information Science & Engineering</h3><p>RV Institute of Technology and Management</p><span>Rank #3 · GPA 9.15/10.0</span></article></div></div>
-    </section>
-    <section class="contact-section" id="contact"><div class="wrap"><div class="section-top"><span class="eyebrow">04 / LET’S BUILD SOMETHING THAT HOLDS UP</span><span class="contact-star" aria-hidden="true">✳</span></div><h2>Your next hard problem.<br/><em>Let’s talk.</em></h2><div class="contact-bottom"><p>Interested in systems software, backend infrastructure<br/>and AI developer tooling opportunities across the US.</p><a class="contact-link" href="mailto:kshiteeshrbharadwaj@gmail.com">Say hello <span aria-hidden="true">↗</span></a></div></div></section>
   </main>
 </Layout>
