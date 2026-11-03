@@ -61,3 +61,7 @@ body{background:#24332c;color:#24332c;font-family:Georgia,'Times New Roman',seri
   .plain-entry p,.plain-entry li,.plain-project>p{font-size:15px}
   .plain-projects{grid-template-columns:1fr;row-gap:16px}
 }
+
+.plain-nav-right .social-icon{display:grid;place-items:center;width:25px;height:25px;color:#24332c}
+.plain-nav-right .social-icon svg{display:block;width:22px;height:22px}
+.plain-nav-right .social-icon:hover{color:#a94828}
