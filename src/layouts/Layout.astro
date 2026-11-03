@@ -24,20 +24,10 @@ const canonical = new URL(Astro.url.pathname, Astro.site);
   </head>
   <body>
     <a class="skip" href="#main">Skip to content</a>
-    <header class="site-header wrap">
-      <a class="brand" href={base} aria-label="Kshiteesh Bharadwaj — home"><span>Kshiteesh R Bharadwaj</span></a>
-      <nav aria-label="Main navigation">
-        <a href={base + '#experience'}>Experience</a>
-        <a href={base + '#projects'}>Projects</a>
-        <a href={base + '#education'}>Education</a>
-        <a class="nav-resume" href={base + 'resume.pdf'}>Resume (PDF) ↗</a>
-      </nav>
+    <header class="site-header">
+      <nav class="plain-nav wrap" aria-label="Main navigation"><div class="plain-nav-left"><a href={base + '#about'}>About</a><a href={base + '#experience'}>Experience</a><a href={base + '#projects'}>Projects</a><a href={base + '#education'}>Education</a><a href={base + 'resume.pdf'}>Resume</a></div><div class="plain-nav-right"><a href="https://linkedin.com/in/kshiteesh-bharadwaj-kb2001" aria-label="LinkedIn">in</a><a href="https://github.com/kshiteesh28" aria-label="GitHub">GitHub</a><a href="mailto:kshiteeshrbharadwaj@gmail.com" aria-label="Email">Email</a></div></nav>
     </header>
     <slot />
-    <footer class="site-footer wrap">
-      <a class="footer-name" href={base}>Kshiteesh R Bharadwaj<span>Software Engineer · Champaign, Illinois</span></a>
-      <div><a href="https://github.com/kshiteesh28">GitHub ↗</a><a href="https://linkedin.com/in/kshiteesh-bharadwaj-kb2001">LinkedIn ↗</a><a href={base + 'resume.pdf'}>Resume ↗</a></div>
-      <span class="footer-note">© {new Date().getFullYear()} Kshiteesh R Bharadwaj</span>
-    </footer>
+    <footer class="plain-footer"><div class="wrap">© {new Date().getFullYear()} Kshiteesh R Bharadwaj · Champaign, Illinois</div></footer>
   </body>
 </html>
